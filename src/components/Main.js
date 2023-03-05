@@ -47,7 +47,7 @@ function Main() {
         <div className="popup__container">
           <button className="popup__close" />
           <h2 className="popup__title">Обновить аватар</h2>
-          <form className="popup__form popup__form_type_avatar-edit" id="form-for-edit-avatar" noValidate="">
+          <form className="popup__form popup__form_type_avatar-edit" name="avatar-edit" id="form-for-edit-avatar" noValidate="">
             <input
               id="link-avatar"
               type="url"
@@ -70,7 +70,7 @@ function Main() {
         <div className="popup__container">
           <button className="popup__close" />
           <h2 className="popup__title">Редактировать профиль</h2>
-          <form className="popup__form popup__form_type_edit-profile" noValidate="">
+          <form className="popup__form popup__form_type_edit-profile" name="edit-profile" noValidate="">
             <input
               id="input-edit-profile"
               className="popup__input popup__input_name"
@@ -105,7 +105,7 @@ function Main() {
     <div className="popup__container">
       <button className="popup__close" />
       <h2 className="popup__title">Новое место</h2>
-      <form className="popup__form" id="form-for-card" noValidate="">
+      <form className="popup__form" name="card-add" noValidate="">
         <input
           className="name popup__input popup__input_name"
           id="name-card"
@@ -132,6 +132,17 @@ function Main() {
           type="submit"
           defaultValue="Создать"
         />
+      </form>
+    </div>
+  </div>
+  <div className="popup popup_type_card-delete">
+    <div className="popup__container">
+      <button className="popup__close" />
+      <h2 className="popup__title">Вы уверены?</h2>
+      <form className="popup__form" name="card-delete" id="form-for-delete">
+        <button id="card-submit-delete" className="popup__button" type="submit">
+          Да
+        </button>
       </form>
     </div>
   </div>
