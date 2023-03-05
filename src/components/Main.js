@@ -1,49 +1,67 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { api } from '../utils/api';
+import Card from './Card';
 
-function Main() {
-  function handleEditAvatarClick() {
-    const popupEditAvatar = document.querySelector(".popup_type_avatar-edit");
-    popupEditAvatar.classList.add("popup_is-opened");
-  }
+function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
+const [userName, setUserName] = useState("")
+const [userDescription, setuserDescription] = useState("")
+const [userAvatar, setUserAvatar] = useState("")
+const [cards, setCards] = useState([])
 
-  function handleEditProfileClick() {
-    const popupEditProfile = document.querySelector(".popup_type_edit-profile");
-    popupEditProfile.classList.add("popup_is-opened");
-  }
+useEffect(() => {
+  Promise.all([api.getInfo(), api.getInitialCards()])
+  .then(([userData, cardsData]) => {
+    setUserName(userData.name);
+    setuserDescription(userData.about);
+    setUserAvatar(userData.avatar);
+    setCards(cardsData)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+}, [])
 
-  function handleAddPlaceClick() {
-    const popupAddPlace = document.querySelector(".popup_type_card-add");
-    popupAddPlace.classList.add("popup_is-opened");
-  }
+  
 
   return (
     <>
       <main className="content">
         <section className="profile">
           <button
-            onClick={handleEditAvatarClick}
+            onClick={onEditAvatar}
             className="profile__edit-avatar-btn"
             type="button"
           >
-            <img src="#" alt="Аватар." className="profile__avatar" />
+            <img src={`${userAvatar}`} alt="Аватар." className="profile__avatar" />
           </button>
           <div className="profile__info">
-            <h1 className="profile__name">Имя юзера</h1>
+            <h1 className="profile__name">{userName}</h1>
             <button
-              onClick={handleEditProfileClick}
+            type='button'
+              onClick={onEditProfile}
               className="profile__edit-button"
             ></button>
-            <p className="profile__occupation" />
+            <p className="profile__occupation">{userDescription}</p>
           </div>
-          <button onClick={handleAddPlaceClick} className="profile__button">
-            <img src="#" alt="Кнопка в виде знака плюс" />
-          </button>
+          <button onClick={onAddPlace} className="profile__button"/>
         </section>
         <section className="elements">
-          <ul className="elements__list"></ul>
+          <ul className="elements__list">
+{cards.map((card) => {
+  return (
+    <Card
+    key={card._id}
+    card={card}
+    link={card.link}
+    name={card.name}
+    onCardClick={onCardClick}
+    />
+  )
+})}
+          </ul>
         </section>
       </main>
-      <div className="popup popup_type_avatar-edit">
+      {/* <div className="popup popup_type_avatar-edit">
         <div className="popup__container">
           <button className="popup__close" />
           <h2 className="popup__title">Обновить аватар</h2>
@@ -145,7 +163,7 @@ function Main() {
         </button>
       </form>
     </div>
-  </div>
+  </div> */}
     </>
   );
 }

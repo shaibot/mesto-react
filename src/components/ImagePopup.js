@@ -1,14 +1,4 @@
-import React from 'react';
 
-function ImagePopup(props) {
-    return (
-      <>
-        
-      </>
-    );
-  }
-  
-  export default ImagePopup;
 
 // {/* <div className="popup popup_big-image popup_type_image-big">
 //     <figure className="popup__image-container">
@@ -17,3 +7,19 @@ function ImagePopup(props) {
 //       <figcaption className="popup__image-caption" />
 //     </figure>
 //   </div> */}
+
+import React from "react";
+
+function ImagePopup({ card, onClose }) {
+  return (
+    <section className={`popup popup_image ${card.link ? "popup_opened" : ""}`}>
+      <div className="popup__image-container">
+        <button className="popup__close" onClick={onClose}></button>
+        <img className="popup__image-item" src={card.link} alt={card.name} />
+        <h2 className="popup__image-title">{card.name}</h2>
+      </div>
+    </section>
+  );
+};
+
+export default ImagePopup;
