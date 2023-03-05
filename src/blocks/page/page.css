@@ -5,5 +5,7 @@
   min-height: 100vh;
   text-rendering: optimizeLegibility;
   margin: 0 auto;
-  color: #fff;
-}
+  color: #fff;  
+  padding-top: 45px;
+  padding-bottom: 40px;
+  }
