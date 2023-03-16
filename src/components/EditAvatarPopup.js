@@ -3,12 +3,16 @@ import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup({ isOpen, onClose}) {
     return (
-        <PopupWithForm isOpen={isOpen} onClose={onClose} name="avatar" title="Сменить аватар" buttonText="Сохранить">
-            <fieldset className="popup__fieldset">
-                <input className="popup__input popup__input_type_avatar-edit" name="avatar-edit" type="url"
-                placeholder="Введите ссылку на изображение" required id="avatar"/>
-                <span id="avatar-error" className="popup__error"></span>
-            </fieldset>
+        <PopupWithForm isOpen={isOpen} onClose={onClose} name="avatar-edit" title="Сменить аватар" buttonText="Сохранить">            
+            <input
+              id="link-avatar"
+              type="url"
+              className="popup__occupation link popup__input popup__input_link"
+              name="link"
+              placeholder="Ссылка на картинку"
+              required=""
+            />
+            <span id="link-avatar-error" className="popup__error" />
         </PopupWithForm>
     )
 }

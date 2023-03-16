@@ -1,21 +1,37 @@
 import React from "react";
-import PopupWithForm from "./PopupWithForm"
+import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup({ isOpen, onClose }) {
   return (
-    <PopupWithForm isOpen={isOpen} onClose={onClose} name='add' title='Новое место' buttonText='Создать'>
-      <fieldset className="popup__fieldset">
-        <input className="popup__input popup__input_type_nickname" name="title" type="text" 
-          placeholder="Название" required minLength="2" maxLength="30" id="nickname" />
-        <span id="nickname-error" className="popup__error popup__error_visible"></span>
-      </fieldset>
-      <fieldset className="popup__fieldset">
-        <input className="popup__input popup__input_type_link" name="link" type="url" 
-          placeholder="Ссылка на картинку" required id="link" />
-        <span id="link-error" className="popup__error popup__error_visible"></span>
-      </fieldset>
+    <PopupWithForm
+      isOpen={isOpen}
+      onClose={onClose}
+      name="card-add"
+      title="Новое место"
+      buttonText="Создать"
+    >
+      <input
+        className="name popup__input popup__input_name"
+        id="name-card"
+        name="name"
+        type="text"
+        placeholder="Название"
+        minLength={2}
+        maxLength={30}
+        required=""
+      />
+      <span id="name-card-error" className="popup__error" />
+      <input
+        id="link"
+        type="url"
+        className="popup__occupation link popup__input"
+        name="link"
+        placeholder="Ссылка на картинку"
+        required=""
+      />
+      <span id="link-error" className="popup__error" />
     </PopupWithForm>
-  )
+  );
 }
 
 export default AddPlacePopup;
