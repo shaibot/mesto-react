@@ -1,11 +1,8 @@
-export const popupEditAvatarSelector = '#popup-avatar-edit'
 export const popupEditAvatar = document.querySelector(popupEditAvatarSelector)
 export const popupFormEditAvatar = popupEditAvatar.querySelector(
   '#form-for-edit-avatar',
 )
 
-export const popupEditProfile = document.querySelector('#popup-edit-profile')
-export const popupCardAdd = document.querySelector('#popup-card-add')
 export const popupOpenButtonElement = document.querySelector(
   '.profile__edit-button',
 )
@@ -17,9 +14,7 @@ export const editAvatarBtn = document.querySelector('.profile__edit-avatar-btn')
 export const popupDeleteCard = document.querySelector('#popup-card-delete')
 export const BtnOpenPopupDeleteCard = document.querySelector('element__card-delete')
 
-export const popupImageSelector = '#popup-image-big'
 export const cardListContainer = '.elements__list'
-export const cardTemplateSelector = '#card-template'
 export const cardAddForm = popupCardAdd.querySelector('.popup__form')
 export const profileEditForm = popupEditProfile.querySelector('.popup__form')
 
