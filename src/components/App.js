@@ -9,7 +9,7 @@ import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import api from "../utils/api";
 
-function App() {
+function App () {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -62,8 +62,9 @@ function App() {
 
   const handleUpdateUser = (data) => {
     setIsEditProfileChanging(true);
+    console.log(data);
     api
-      .addInfo(data)
+      .editUserInfo(data)
       .then((newData) => {
         setCurrentUser(newData);
       })
@@ -81,7 +82,7 @@ function App() {
   const handleUpdateAvatar = (data) => {
     setIsEditAvatarChanging(true);
     api
-      .addAvatar(data)
+      .editUserAvatar(data)
       .then((newData) => {
         setCurrentUser(newData);
       })
@@ -99,7 +100,7 @@ function App() {
   const handleAddPlaceSubmit = (data) => {
     setIsAddPlaceChanging(true);
     api
-      .createCard(data)
+      .addNewCard(data)
       .then((newData) => {
         setCards([newData, ...cards]);
       })
@@ -114,15 +115,16 @@ function App() {
       });
   };
 
-  function handleCardLike(card) {
+  function handleCardLike (card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    
+
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+    api.changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
-}
+      });
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

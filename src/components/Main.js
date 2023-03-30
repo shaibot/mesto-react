@@ -2,7 +2,7 @@ import { useContext } from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function Main({
+function Main ({
   onEditProfile,
   onAddPlace,
   onEditAvatar,

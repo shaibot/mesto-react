@@ -4,6 +4,7 @@
   border-radius: 50%;
   z-index: 0;
   object-fit: cover;
+  background-position: center;
 }
 
 .profile__avatar:hover {
@@ -17,4 +18,3 @@
     margin-right: 0;
   }
 }
-
