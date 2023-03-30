@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from "react";
-import api from "../utils/api";
+import { useContext } from "react";
 import Card from "./Card";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setuserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([user, cardsData]) => {
-        setUserName(user.name);
-        setuserDescription(user.about);
-        setUserAvatar(user.avatar);
-        setCards(cardsData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+function Main({
+  onEditProfile,
+  onAddPlace,
+  onEditAvatar,
+  onCardClick,
+  onCardDelete,
+  onCardLike,
+  cards,
+}) {
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <>
@@ -31,18 +23,18 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
             type="button"
           >
             <div
-              style={{ backgroundImage: `url(${userAvatar})` }}
+              style={{ backgroundImage: `url(${currentUser.avatar})` }}
               className="profile__avatar"
             ></div>
           </button>
           <div className="profile__info">
-            <h1 className="profile__name">{userName}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button
               type="button"
               onClick={onEditProfile}
               className="profile__edit-button"
             ></button>
-            <p className="profile__occupation">{userDescription}</p>
+            <p className="profile__occupation">{currentUser.about}</p>
           </div>
           <button onClick={onAddPlace} className="profile__button" />
         </section>
@@ -56,6 +48,8 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
                   link={card.link}
                   name={card.name}
                   onCardClick={onCardClick}
+                  onCardLike={onCardLike}
+                  onCardDelete={onCardDelete}
                 />
               );
             })}
